@@ -1,0 +1,64 @@
+﻿@model IEnumerable<EmpresaSolutions.Models.Empresa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<h2>Buscar Empresas por RUC</h2>
+
+<form method="get" action="@Url.Action("IndexEmpresa")">
+    <p>
+        RUC: <input type="number" name="ruc" />
+        <input type="submit" value="Buscar" />
+    </p>
+</form>
+<p>
+    <a asp-action="ExportToExcel">Exportar a Excel</a>
+</p>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RUC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RazonSocial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaFundacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RUC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RazonSocial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaFundacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EmpresaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EmpresaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EmpresaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
